@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+# rems
+## Contents
+- [Description](#description)
+- [Features](#features)
+- [Setup](#setup)
+- [Requirements](#requirements)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
+> In today's world, a physician's job is complicated by tedious and repetitive forms, reports, and surveys. Rems is a platform that serves not only to optimize these time consuming aspects of a physician's workload, but also to provide a framework of tools and services designed to help physicians organize patients, track important dates, and communicate with drug manufacturers.
 
-## Available Scripts
+## Features
+- **Dashboard:**    
 
-In the project directory, you can run:
+- **Surveys**    
 
-### `npm start`
+- **Patients**    
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Calendar**     
+  
+- **Reports**    
+  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Setup
 
-### `npm test`
+### UI
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Clone repository
 
-### `npm run build`
+```bash
+git clone https://github.com/jdai1/rems.git
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Install dependencies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Serve app
+```bash
+npm start
+```
 
-### `npm run eject`
+### Amplify
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+--> Install and configure [AWS Amplify](https://docs.amplify.aws/cli/start/install/)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Be sure to download the [accesKeyId and secretKey](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+--> Add [hosting](https://docs.amplify.aws/start/getting-started/hosting/q/integration/js/)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+In the amplify add hosting configurations, select Amazon Cloudfront and S3 for plugin module, DEV for environment, and index.html for index doc.
 
-## Learn More
+After successfully running
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+amplify publish
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+the web app will be hosted on an S3 bucket which can be seen from the AWS management console. The web app will be accessible from the link in the output.
 
-### Code Splitting
+### Cognito
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Create User Pool from AWS management console.
 
-### Analyzing the Bundle Size
+Configuration:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+Import the user pool to the amplify project (you may be prompted for accessKeyId and secretKey)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+amplify import auth
+```
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
