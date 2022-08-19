@@ -4,8 +4,6 @@ import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
-const drawerWidth = 200;
-
 export default function Calendar() {
     const theme = useTheme();
     return (
@@ -13,7 +11,7 @@ export default function Calendar() {
             component="main"
             sx={{ 
                 flexGrow: 1, 
-                p: 3, ml: drawerWidth + 'px', 
+                p: 3,
                 bgcolor: theme.palette.secondary.main,
                 height: '100vh'
             }}

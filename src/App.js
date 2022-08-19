@@ -8,6 +8,8 @@ import Patients from './pages/Patients';
 import Calendar from './pages/Calendar';
 import Reports from './pages/Reports';
 import Surveys from './Surveys/Surveys';
+import Login from './Login/Login';
+
 
 const theme = createTheme({
   palette: {
@@ -25,18 +27,19 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <Navigation></Navigation>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="surveys" element={<Surveys />}/>
-          <Route path="patients" element={<Patients />} />
-          <Route path="calendar" element={<Calendar />} />
-          <Route path="reports" element={<Reports />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Navigation />}>
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="surveys" element={<Surveys />} />
+            <Route path="patients" element={<Patients />} />
+            <Route path="calendar" element={<Calendar />} />
+            <Route path="reports" element={<Reports />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
   );
 }
 
-//export default App;
+export default App;

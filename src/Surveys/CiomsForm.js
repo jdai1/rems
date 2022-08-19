@@ -23,53 +23,12 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import { useForm, Controller } from "react-hook-form";
 
-export default function GenericForm() {
+export default function CiomsForm() {
     // concomitant & other suspect medications
     const [concomitantMedicationData, setConcomitantMedicationData] = useState([]);
     const [showConcomitantMedicationField, setShowConcomitantMedicationField] = useState(false);
     // relevant diagnostic tests and laboratory data
     const [diagnosticTestData, setDiagnosticTestData] = useState([]);
-    // death (AE)
-    const [death, setDeath] = useState(false);
-
-    const { handleSubmit, control, resetField, getValues } = useForm({
-        defaultValues: {
-            aeEnd: null,
-            aeOnset: null,
-            age: null,
-            dates: null,
-            discontinuedDescription: null,
-            dob: null,
-            dosage: null,
-            dosageChangeDetails: null,
-            dosageRouterFrequency: null,
-            drugName: null,
-            duration: null,
-            eventDescription: null,
-            eventOutcome: null,
-            frequency: null,
-            gender: null,
-            height: null,
-            indication: null,
-            lotNumber: null,
-            medicalHistory: null,
-            normalRange: null,
-            physicianAssessment: null,
-            pregnant: null,
-            race: null,
-            restartedDescription: null,
-            results: null,
-            route: null,
-            startDate: null,
-            stopDate: null,
-            concomitantMedicationDescription: null,
-            tableStartDate: null,
-            tableStopDate: null,
-            tests: null,
-            treatmentAndOutcome: null,
-            weight: null,
-        }
-    });
 
     const drugNameRef = useRef();
     const indicationRef = useRef();
@@ -82,10 +41,11 @@ export default function GenericForm() {
     const resultsRef = useRef();
     const normalRangeRef = useRef();
 
+    const { handleSubmit, control, resetField, getValues } = useForm({});
     const onSubmit = (data, e) => console.log(data, e);
     const onError = (errors, e) => console.log(errors, e);
     const onMedChange = (event) => setShowConcomitantMedicationField(!showConcomitantMedicationField);
-    const onDeathChange = (event) => setDeath(!death);
+
     return (
         <form onSubmit={handleSubmit(onSubmit, onError)}>
             <Grid container spacing={2} sx={{ pr: 2 }}>
@@ -98,7 +58,6 @@ export default function GenericForm() {
                         Patient Information (I):
                     </Typography>
                 </Grid>
-                
                 <Grid item xs={12}>
                     <Controller
                         name="medicalHistory"
@@ -123,18 +82,10 @@ export default function GenericForm() {
                 <Grid item xs={12}>
                     <Typography
                         sx={{
-                            fontWeight: 500,
-                            display: 'block'
+                            fontWeight: 500
                         }}
                     >
-                        Drug Therapy Information (II):
-                    </Typography>
-                    <Typography
-                        sx={{
-                            fontWeight: 200,
-                        }}
-                    >
-                        Please complete with dates/times the product was stopped and restarted if applicable.
+                        Suspect Drug(s) Information (II):
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -601,76 +552,36 @@ export default function GenericForm() {
                 <Grid item xs={12}>
                     <Typography
                         sx={{
-                            fontWeight: 500,
-                            display: 'block'
+                            fontWeight: 500
                         }}
                     >
-                        Adverse Event Information (V):
+                        Reaction Information (I):
                     </Typography>
                 </Grid>
-                <Grid item xs={3}>
-                    <Controller
-                        name="aeOnset"
-                        control={control}
-                        render={({ field: { onChange, onBlur, value, ref } }) => (
-                            <FormControl>
-                                <FormLabel
-                                    sx={{
-                                        mb: '7.5px'
-                                    }}
-                                >
-                                    Event Onsent
-                                </FormLabel>
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DatePicker
-                                        value={value}
-                                        onChange={onChange}
-                                        renderInput={(params) => <TextField {...params} />}
-                                        reduceAnimations
-                                    />
-                                </LocalizationProvider>
-                            </FormControl>
-                        )}
-                    />
-                </Grid>
-                <Grid item xs={3}>
-                    <Controller
-                        name="aeEnd"
-                        control={control}
-                        render={({ field: { onChange, onBlur, value, ref } }) => (
-                            <FormControl>
-                                <FormLabel
-                                    sx={{
-                                        mb: '7.5px'
-                                    }}
-                                >
-                                    End date
-                                </FormLabel>
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DatePicker
-                                        value={value}
-                                        onChange={onChange}
-                                        renderInput={(params) => <TextField {...params} />}
-                                        reduceAnimations
-                                    />
-                                </LocalizationProvider>
-                            </FormControl>
-                        )}
-                    />
-                </Grid>
                 <Grid item xs={12}>
-                    <FormControl>
-                        <FormLabel>Did the patient die as a result of the adverse event in question?</FormLabel>
-                        <RadioGroup
-                            onChange={onDeathChange}
-                            label={"Death"}
-                            defaultValue={"no"}
-                            row
-                        >
-                            <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                            <FormControlLabel value="no" control={<Radio />} label="No" />
-                        </RadioGroup>
-                    </FormControl>
+                    <Controller
+                        name="reactionOnset"
+                        control={control}
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <FormControl sx={{ mr: '15px' }}>
+                                <FormLabel
+                                    sx={{
+                                        mb: '7.5px',
+                                    }}
+                                >
+                                    Reaction Onset
+                                </FormLabel>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <DatePicker
+                                        value={value}
+                                        onChange={onChange}
+                                        renderInput={(params) => <TextField {...params} />}
+                                        reduceAnimations
+                                    />
+                                </LocalizationProvider>
+                            </FormControl>
+                        )}
+                    />
                 </Grid>
                 <Grid item xs={12}>
                     <Controller
@@ -680,79 +591,13 @@ export default function GenericForm() {
                             <FormControl>
                                 <FormLabel>Event Description</FormLabel>
                                 <FormGroup>
-                                    <FormControlLabel value="fatal" disabled={death} control={<Checkbox onChange={onChange} />} label="Fatal" />
-                                    <FormControlLabel value="hospitalization" disabled={death} control={<Checkbox onChange={onChange} />} label="Hospitalization" />
-                                    <FormControlLabel value="permanent" disabled={death} control={<Checkbox onChange={onChange} />} label="Permanent" />
-                                    <FormControlLabel value="disability" disabled={death} control={<Checkbox onChange={onChange} />} label="Disability" />
-                                    <FormControlLabel value="congenitalAnomaly" disabled={death} control={<Checkbox onChange={onChange} />} label="Congenital anomaly" />
-                                    <FormControlLabel value="noneOfTheAbove" disabled={death} control={<Checkbox onChange={onChange} />} label="None of the above" />
+                                    <FormControlLabel value="fatal" control={<Checkbox onChange={onChange} />} label="Fatal" />
+                                    <FormControlLabel value="lifeThreatening" control={<Checkbox onChange={onChange} />} label="Life Threatening" />
+                                    <FormControlLabel value="hospitalization" control={<Checkbox onChange={onChange} />} label="Hospitalization" />
+                                    <FormControlLabel value="disability" control={<Checkbox onChange={onChange} />} label="Disability" />
+                                    <FormControlLabel value="lifeThreatening" control={<Checkbox onChange={onChange} />} label="Congenital anomaly" />
+                                    <FormControlLabel value="noneOfTheAbove" control={<Checkbox onChange={onChange} />} label="None of the above" />
                                 </FormGroup>
-                            </FormControl>
-                        )}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <Controller
-                        name="eventOutcome"
-                        control={control}
-                        render={({ field: { onChange, onBlur, value, ref } }) => (
-                            <FormControl>
-                                <FormLabel>Event Outcome</FormLabel>
-                                <RadioGroup
-                                    onChange={onChange}
-                                    label={"Event Outcome"}
-                                    row
-                                >
-                                    <FormControlLabel value="resolved" disabled={death} control={<Radio />} label="Resolved" />
-                                    <FormControlLabel value="resolving" disabled={death} control={<Radio />} label="Resolving" />
-                                    <FormControlLabel value="recoveredWSequelae" disabled={death} control={<Radio />} label="Recovered w/ sequelae" />
-                                    <FormControlLabel value="notRecovered" disabled={death} control={<Radio />} label="Not recovered" />
-                                    <FormControlLabel value="unknown" disabled={death} control={<Radio />} label="Unknown" />
-                                </RadioGroup>
-                            </FormControl>
-                        )}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <Controller
-                        name="physicianAssessment"
-                        control={control}
-                        render={({ field: { onChange, onBlur, value, ref } }) => (
-                            <FormControl>
-                                <FormLabel>Physician Assessment</FormLabel>
-                                <RadioGroup
-                                    onChange={onChange}
-                                    label={"Physician Assessment"}
-                                    row
-                                >
-                                    <FormControlLabel value="confirmed" control={<Radio />} label="Confirmed" />
-                                    <FormControlLabel value="possible" control={<Radio />} label="Possible" />
-                                    <FormControlLabel value="probable" control={<Radio />} label="Probable" />
-                                    <FormControlLabel value="unrelated" control={<Radio />} label="Unrelated" />
-                                    <FormControlLabel value="unknown" control={<Radio />} label="Unknown" />
-                                </RadioGroup>
-                            </FormControl>
-                        )}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <Controller
-                        name="treatmentAndOutcome"
-                        control={control}
-                        render={({ field: { onChange, onBlur, value, ref } }) => (
-                            <FormControl fullWidth>
-                                <FormLabel
-                                    sx={{
-                                        mb: '7.5px'
-                                    }}
-                                >
-                                    Describe the event(s) in space below, include treatment provided & outcome if applicable.
-                                </FormLabel>
-                                <TextField
-                                    onChange={onChange}
-                                    multiline
-                                    rows={3}
-                                />
                             </FormControl>
                         )}
                     />
@@ -768,7 +613,7 @@ export default function GenericForm() {
                                         mb: '7.5px'
                                     }}
                                 >
-                                    If the XXX product was discontinued, specify which event(s) listed above resolved?
+                                    If the XXX product was discontinued, specify which reaction(s) listed above resolved?
                                 </FormLabel>
                                 <TextField
                                     onChange={onChange}
@@ -789,7 +634,7 @@ export default function GenericForm() {
                                         mb: '7.5px'
                                     }}
                                 >
-                                    If the XXX drug was restarted, specify which event(s) listed above re-occurred?
+                                    If the XXX drug was restarted, specify which reaction(s) listed above re-occurred?
                                 </FormLabel>
                                 <TextField
                                     onChange={onChange}
@@ -800,9 +645,148 @@ export default function GenericForm() {
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <Button variant="contained" type="Submit">Submit</Button>
+                    <Typography
+                        sx={{
+                            fontWeight: 500,
+                            display: 'block'
+                        }}
+                    >
+                        Manufacturer Information (V):
+                    </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <Controller
+                        name="manufacturerName"
+                        control={control}
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <TextField
+                                onChange={onChange}
+                                label={"Name"}
+                                fullWidth
+                            />
+                        )}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <Controller
+                        name="manufacturerAddress"
+                        control={control}
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <TextField
+                                onChange={onChange}
+                                label={"Address"}
+                                fullWidth
+                            />
+                        )}
+                    />
+                </Grid>
+                <Grid item xs={3}>
+                    <Controller
+                        name="manufacturerControlNumber"
+                        control={control}
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <TextField
+                                onChange={onChange}
+                                label={"Control Number"}
+                                fullWidth
+                            />
+                        )}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <Controller
+                        name="dateReceivedByManufacturer"
+                        control={control}
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <FormControl sx={{ mr: '15px' }}>
+                                <FormLabel
+                                    sx={{
+                                        mb: '7.5px',
+                                    }}
+                                >
+                                    Date Received
+                                </FormLabel>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <DatePicker
+                                        value={value}
+                                        onChange={onChange}
+                                        renderInput={(params) => <TextField {...params} />}
+                                        reduceAnimations
+                                    />
+                                </LocalizationProvider>
+                            </FormControl>
+                        )}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <Controller
+                        name="reportSource"
+                        control={control}
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <FormControl>
+                                <FormLabel>Report Source</FormLabel>
+                                <RadioGroup
+                                    onChange={onChange}
+                                    label={"Report Source"}
+                                >
+                                    <FormControlLabel value="study" control={<Radio />} label="Study" />
+                                    <FormControlLabel value="healthProfession" control={<Radio />} label="Health Profession" />
+                                    <FormControlLabel value="literature" control={<Radio />} label="Literature" />
+                                    <FormControlLabel value="other" control={<Radio />} label="Disability" />
+                                </RadioGroup>
+                            </FormControl>
+                        )}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <Controller
+                        name="reportType"
+                        control={control}
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <FormControl>
+                                <FormLabel>Report Type</FormLabel>
+                                <RadioGroup
+                                    onChange={onChange}
+                                    label={"Report Type"}
+                                >
+                                    <FormControlLabel value="initial" control={<Radio />} label="Initial" />
+                                    <FormControlLabel value="followup" control={<Radio />} label="Follow Up" />
+                                </RadioGroup>
+                            </FormControl>
+                        )}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <Controller
+                        name="addressOfReporter"
+                        control={control}
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <TextField
+                                onChange={onChange}
+                                label={"Address of Reporter"}
+                                fullWidth
+                            />
+                        )}
+                    />
+                </Grid>
+                <Grid item xs={12} sx={{ mb: '7.5px' }}>
+                    <Controller
+                        name="remarks"
+                        control={control}
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <TextField
+                                onChange={onChange}
+                                label={"Remarks"}
+                                fullWidth
+                                multiline
+                                rows={4}
+                            />
+                        )}
+                    />
                 </Grid>
             </Grid>
+
+            <Button variant="contained" type="Submit">Submit</Button>
         </form>
-    );
+    )
 }

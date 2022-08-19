@@ -24,7 +24,6 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useForm, Controller } from "react-hook-form";
 
 export default function PneumoniaForm() {
-    const [medicalHistoryData, setMedicalHistoryData] = useState([]);
     const [death, setDeath] = useState(false);
     const [labData, setLabData] = useState([]);
 
@@ -39,20 +38,45 @@ export default function PneumoniaForm() {
 
     const { handleSubmit, control, getValues, resetField } = useForm({
         defaultValues: {
+            baselineDate: null,
+            baselineLabValue: null,
+            boneMarrowHistory: null,
+            colonyStimulatingFactors: null,
+            concomitantMedicationDescription: null,
             description: null,
+            dosage: null,
+            dosageChangeDetails: null,
+            dosageRouterFrequency: null,
+            drugName: null,
+            duration: null,
             eventDescription: null,
             eventOutcome: null,
+            frequency: null,
+            indication: null,
+            infectionDescription: null,
+            infectionProphylaxis: null,
+            lotNumber: null,
             mhDiagnosis: null,
             mhOnset: null,
             pneumoniaEnd: null,
             pneumoniaOnset: null,
+            range: null,
             reccurent: null,
+            recoveryLabDate: null,
+            recoveryLabValue: null,
+            route: null,
+            serology: null,
+            startDate: null,
             status: null,
+            stopDate: null,
+            tableStartDate: null,
+            tableStopDate: null,
+            test: null,
+            treatmentDescription: null,
+            worstLabDate: null,
+            worstLabValue: null,
         }
     });
-
-    const diagnosisRef = useRef();
-    const mhOnsetRef = useRef();
 
     const drugNameRef = useRef();
     const indicationRef = useRef();
@@ -86,12 +110,12 @@ export default function PneumoniaForm() {
                             fontWeight: 500
                         }}
                     >
-                        Patient Information:
+                        Patient Information (I):
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
                     <Controller
-                        name="description"
+                        name="medicalHistory"
                         control={control}
                         render={({ field: { onChange, onBlur, value, ref } }) => (
                             <FormControl fullWidth>
@@ -99,136 +123,16 @@ export default function PneumoniaForm() {
                                     sx={{
                                         mb: '7.5px'
                                     }}
-                                >
-                                    Please provide the type and source of pneumonia (e.g. bacterial, fungal, viral):
-                                </FormLabel>
+                                >Medical History</FormLabel>
                                 <TextField
                                     onChange={onChange}
-                                    fullWidth
+                                    placeholder={"Include pre-existing medical conditions/risk factors, (eg allergies, smoking/alcohol use, hepatic/renal/cardiac dysfunction, etc.)"}
+                                    multiline
+                                    rows={4}
                                 />
                             </FormControl>
                         )}
                     />
-                </Grid>
-                <Grid item xs={12}>
-                    <Controller
-                        name="reccurent"
-                        control={control}
-                        render={({ field: { onChange, onBlur, value, ref } }) => (
-                            <FormControl>
-                                <FormLabel
-                                    sx={{
-                                        mb: '7.5px'
-                                    }}
-                                >Has the patient had a history of recurrent infection?</FormLabel>
-                                <RadioGroup
-                                    row
-                                    onChange={onChange}
-                                >
-                                    <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                                    <FormControlLabel value="no" control={<Radio />} label="No" />
-                                </RadioGroup>
-                            </FormControl>
-                        )}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <Controller
-                        name="status"
-                        control={control}
-                        render={({ field: { onChange, onBlur, value, ref } }) => (
-                            <FormControl fullWidth>
-                                <FormLabel
-                                    sx={{
-                                        mb: '7.5px'
-                                    }}
-                                >
-                                    What was the status of the underlying disease (multiple myeloma) at the time of the infection onset?
-                                </FormLabel>
-                                <TextField
-                                    onChange={onChange}
-                                    fullWidth
-                                />
-                            </FormControl>
-                        )}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TableContainer component={Paper} elevation={0}>
-                        <Table sx={{ width: '100%' }}>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Medical History (Diagnosis)</TableCell>
-                                    <TableCell>Onset Date (as applicable)</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {medicalHistoryData.map((row, index) => (
-                                    <TableRow
-                                        key={index}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
-                                        <TableCell scope="row">{row['diagnosis']}</TableCell>
-                                        <TableCell>{row['onset']}</TableCell>
-                                    </TableRow>
-                                ))}
-                                <TableRow
-                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                >
-                                    <TableCell scope="row" sx={{ p: 1, mt: 1 }}>
-                                        <Controller
-                                            name="mhDiagnosis"
-                                            control={control}
-                                            render={({ field: { onChange, onBlur, value, ref } }) => (
-                                                <TextField
-                                                    inputRef={diagnosisRef}
-                                                    onChange={onChange}
-                                                    placeholder={"Diagnosis"}
-                                                    size="small"
-                                                    fullWidth
-                                                />
-                                            )}
-                                        />
-                                    </TableCell>
-                                    <TableCell align="right" sx={{ p: 1 }}>
-                                        <Controller
-                                            name="mhOnset"
-                                            control={control}
-                                            render={({ field: { onChange, onBlur, value, ref } }) => (
-                                                <TextField
-                                                    inputRef={mhOnsetRef}
-                                                    onChange={onChange}
-                                                    placeholder={"Onset Date"}
-                                                    size="small"
-                                                    fullWidth
-                                                />
-                                            )}
-                                        />
-                                    </TableCell>
-                                </TableRow>
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </Grid>
-                <Grid item xs={12} sx={{ ml: 1 }}>
-                    {/* potential future task: require fields to be filled out before adding or add feature to edit or delete fields */}
-                    <Button
-                        variant="contained"
-                        onClick={() => {
-                            const newData = medicalHistoryData.slice();
-                            newData.push({
-                                diagnosis: getValues("mhDiagnosis"),
-                                onset: getValues("mhOnset"),
-                            });
-                            setMedicalHistoryData(newData);
-                            ["diagnosis", "onsetDate"].forEach(resetField);
-                            diagnosisRef.current.value = '';
-                            mhOnsetRef.current.value = '';
-                        }}
-                        sx={{ mb: 2 }}
-                    >
-                        Add
-                    </Button>
                 </Grid>
                 <Grid item xs={12}>
                     <Typography
@@ -237,7 +141,7 @@ export default function PneumoniaForm() {
                             display: 'block'
                         }}
                     >
-                        Drug Therapy Information:
+                        Drug Therapy Information (II):
                     </Typography>
                     <Typography
                         sx={{
@@ -393,7 +297,7 @@ export default function PneumoniaForm() {
                             display: 'block'
                         }}
                     >
-                        Concomitant & Other Suspect Medications:
+                        Concomitant & Other Suspect Medications (III):
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -590,8 +494,72 @@ export default function PneumoniaForm() {
                             display: 'block'
                         }}
                     >
-                        Pneumonia Information:
+                        Pneumonia Information (IV):
                     </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <Controller
+                        name="description"
+                        control={control}
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <FormControl fullWidth>
+                                <FormLabel
+                                    sx={{
+                                        mb: '7.5px'
+                                    }}
+                                >
+                                    Please provide the type and source of pneumonia (e.g. bacterial, fungal, viral):
+                                </FormLabel>
+                                <TextField
+                                    onChange={onChange}
+                                    fullWidth
+                                />
+                            </FormControl>
+                        )}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <Controller
+                        name="reccurent"
+                        control={control}
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <FormControl>
+                                <FormLabel
+                                    sx={{
+                                        mb: '7.5px'
+                                    }}
+                                >Has the patient had a history of recurrent infection?</FormLabel>
+                                <RadioGroup
+                                    row
+                                    onChange={onChange}
+                                >
+                                    <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                                    <FormControlLabel value="no" control={<Radio />} label="No" />
+                                </RadioGroup>
+                            </FormControl>
+                        )}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <Controller
+                        name="status"
+                        control={control}
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <FormControl fullWidth>
+                                <FormLabel
+                                    sx={{
+                                        mb: '7.5px'
+                                    }}
+                                >
+                                    What was the status of the underlying disease (multiple myeloma) at the time of the infection onset?
+                                </FormLabel>
+                                <TextField
+                                    onChange={onChange}
+                                    fullWidth
+                                />
+                            </FormControl>
+                        )}
+                    />
                 </Grid>
                 <Grid item xs={3}>
                     <Controller
@@ -703,7 +671,7 @@ export default function PneumoniaForm() {
                             fontWeight: 500
                         }}
                     >
-                        Physician Assessment:
+                        Physician Assessment (V):
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -1016,7 +984,7 @@ export default function PneumoniaForm() {
                 </Grid>
                 <Grid item xs={12}>
                     <Controller
-                        name="serology/x-ray"
+                        name="serology"
                         control={control}
                         render={({ field: { onChange, onBlur, value, ref } }) => (
                             <FormControl fullWidth>

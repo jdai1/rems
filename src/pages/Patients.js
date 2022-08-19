@@ -6,8 +6,6 @@ import Typography from '@mui/material/Typography';
 
 import PatientEnrollmentForm from '../forms/PatientEnrollmentForm';
 
-const drawerWidth = 200;
-
 export default function Patients() {
     const theme = useTheme();
     return (
@@ -15,7 +13,7 @@ export default function Patients() {
             component="main"
             sx={{ 
                 flexGrow: 1, 
-                p: 3, ml: drawerWidth + 'px', 
+                p: 3,
                 bgcolor: theme.palette.secondary.main,
                 height: '100vh'
             }}

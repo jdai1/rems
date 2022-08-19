@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid';
 
 import DeathForm from "./DeathForm";
 import GenericForm from "./GenericForm";
+import CiomsForm from "./CiomsForm";
 import LiverForm from "./LiverForm";
 import PneumoniaForm from "./PneumoniaForm";
 
@@ -62,8 +63,9 @@ export default function Forms() {
                         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                             <Tab label="Generic Form" {...a11yProps(0)} />
                             <Tab label="Pneumonia Form" {...a11yProps(1)} />
-                            <Tab label="Liver Form" {...a11yProps(2)} />
-                            <Tab label="Death Form" {...a11yProps(3)} />
+                            <Tab label="CIOMS Form" {...a11yProps(2)} />
+                            <Tab label="Liver Form" {...a11yProps(3)} />
+                            <Tab label="Death Form" {...a11yProps(4)} />
                         </Tabs>
                     </Box>
                 </Grid>
@@ -74,10 +76,13 @@ export default function Forms() {
                     <TabPanel value={value} index={1} >
                         <PneumoniaForm />
                     </TabPanel>
-                    <TabPanel value={value} index={2}>
-                        <LiverForm />
+                    <TabPanel value={value} index={2} >
+                        <CiomsForm />
                     </TabPanel>
                     <TabPanel value={value} index={3}>
+                        <LiverForm />
+                    </TabPanel>
+                    <TabPanel value={value} index={4}>
                         <DeathForm />
                     </TabPanel>
                 </Grid>

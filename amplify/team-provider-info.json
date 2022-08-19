@@ -1,0 +1,25 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-rems-dev-181817-authRole",
+      "UnauthRoleArn": "arn:aws:iam::623243298160:role/amplify-rems-dev-181817-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::623243298160:role/amplify-rems-dev-181817-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-rems-dev-181817-deployment",
+      "UnauthRoleName": "amplify-rems-dev-181817-unauthRole",
+      "StackName": "amplify-rems-dev-181817",
+      "StackId": "arn:aws:cloudformation:us-east-1:623243298160:stack/amplify-rems-dev-181817/a99a3940-1f43-11ed-8229-0a9880a94f7b",
+      "AmplifyAppId": "d2wnv8esa7gkoh"
+    },
+    "categories": {
+      "auth": {
+        "rems3a23976c": {
+          "userPoolId": "us-east-1_XNm6AS9VI",
+          "userPoolName": "REMS",
+          "webClientId": "2olqcmpburn64f72p4d68bl5ll",
+          "nativeClientId": "2olqcmpburn64f72p4d68bl5ll"
+        }
+      }
+    }
+  }
+}

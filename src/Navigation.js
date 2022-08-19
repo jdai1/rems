@@ -22,6 +22,8 @@ import TodayIcon from '@mui/icons-material/Today';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import QuizIcon from '@mui/icons-material/Quiz';
 
+import { Outlet } from 'react-router-dom';
+
 const drawerWidth = 200;
 
 export default function Navigation() {
@@ -154,6 +156,7 @@ export default function Navigation() {
                 </List>
                 <Divider />
             </Drawer>
+            <Outlet />
         </Box>
     );
 }
