@@ -9,10 +9,10 @@
 > In today's world, a physician's job is complicated by tedious and repetitive forms, reports, and surveys. Rems is a platform that serves not only to optimize these time consuming aspects of a physician's workload, but also to provide a framework of tools and services designed to help physicians organize patients, track important dates, and communicate with drug manufacturers.
 
 ## Features
-- **Dashboard:**    
+- **Dashboard**    
 
 - **Surveys**    
-
+  Interface with drug manufacturers by filling out and submitting surveys in response to adverse events experienced by patients.
 - **Patients**    
 
 - **Calendar**     

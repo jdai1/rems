@@ -22,12 +22,26 @@ import TodayIcon from '@mui/icons-material/Today';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import QuizIcon from '@mui/icons-material/Quiz';
 
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { useAuthenticator, View } from '@aws-amplify/ui-react';
 
-const drawerWidth = 200;
+const drawerWidth = 200
 
 export default function Navigation() {
+
+    const { route, signOut } = useAuthenticator((context) => [
+        context.route,
+        context.signOut,
+    ]);
+
+    const navigate = useNavigate();
     const theme = useTheme();
+
+    function logOut() {
+        signOut();
+        navigate('/login');
+    }
+
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
@@ -55,7 +69,7 @@ export default function Navigation() {
                     >
                         REMS Portal
                     </Typography>
-                    <Button>Logout</Button>
+                    <Button onClick={logOut}>Logout</Button>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -88,11 +102,11 @@ export default function Navigation() {
                     </Typography>
                 </Toolbar>
                 <List>
-                    <ListItem 
-                        disablePadding 
-                        component={Link} 
+                    <ListItem
+                        disablePadding
+                        component={Link}
                         to={"/dashboard"}
-                        sx={{ color: '#000000'}}
+                        sx={{ color: '#000000' }}
                     >
                         <ListItemButton>
                             <ListItemIcon>
@@ -101,11 +115,11 @@ export default function Navigation() {
                             <ListItemText primary={'Dashboard'} />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem 
-                        disablePadding 
-                        component={Link} 
+                    <ListItem
+                        disablePadding
+                        component={Link}
                         to={"/surveys"}
-                        sx={{ color: '#000000'}}
+                        sx={{ color: '#000000' }}
                     >
                         <ListItemButton>
                             <ListItemIcon>
@@ -114,11 +128,11 @@ export default function Navigation() {
                             <ListItemText primary={'Surveys'} />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem 
-                        disablePadding 
-                        component={Link} 
+                    <ListItem
+                        disablePadding
+                        component={Link}
                         to={"/patients"}
-                        sx={{ color: '#000000'}}
+                        sx={{ color: '#000000' }}
                     >
                         <ListItemButton>
                             <ListItemIcon>
@@ -127,11 +141,11 @@ export default function Navigation() {
                             <ListItemText primary={'Patients'} />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem 
-                        disablePadding 
-                        component={Link} 
+                    <ListItem
+                        disablePadding
+                        component={Link}
                         to={"/calendar"}
-                        sx={{ color: '#000000'}}
+                        sx={{ color: '#000000' }}
                     >
                         <ListItemButton>
                             <ListItemIcon>
@@ -140,11 +154,11 @@ export default function Navigation() {
                             <ListItemText primary={'Calendar'} />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem 
-                        disablePadding 
-                        component={Link} 
+                    <ListItem
+                        disablePadding
+                        component={Link}
                         to={"/reports"}
-                        sx={{ color: '#000000'}}
+                        sx={{ color: '#000000' }}
                     >
                         <ListItemButton>
                             <ListItemIcon>
